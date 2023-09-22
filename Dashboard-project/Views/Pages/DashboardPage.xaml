@@ -1,0 +1,147 @@
+﻿<Page xmlns:c1="http://schemas.componentone.com/winfx/2006/xaml"  x:Class="Dashboard_project.Views.Pages.DashboardPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Dashboard_project.Views.Pages" 
+      xmlns:UserControls="clr-namespace:Dashboard_project.Views.UserControls"
+      xmlns:UCDiagramm="clr-namespace:Dashboard_project.Views.UserControls.Diagramm" xmlns:uicomponents="clr-namespace:Dashboard_project.Views.UserControls.UIComponents"
+      mc:Ignorable="d" 
+      d:DesignHeight="620" d:DesignWidth="1000"
+      Title="DashboardPage">
+
+    <Grid Grid.Column="2">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!-- Блок с названием и статистикой изменений -->
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4">
+            <Grid.RowDefinitions>
+                <RowDefinition MinHeight="40" Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <!-- Название -->
+                <TextBlock Grid.Column="0" Text="Дашборды" Style="{StaticResource HeaderTextBlock}"/>
+                <!-- Блок с выбором даты -->
+                <Grid Grid.Column="2" Margin="10 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <DatePicker Style="{StaticResource DatePickerStyle1}" Grid.Column="3" Margin="0 10 0 0"
+                                CalendarStyle="{StaticResource StyleCalendar}">
+                    </DatePicker>
+
+                    <Border Background="{StaticResource Addict}" Margin="5 14 5 6" CornerRadius="5" Grid.Column="1">
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
+                                   Foreground="{StaticResource Akcent}" Text="Месяц"></TextBlock>
+                    </Border>
+
+                    <Border Background="{StaticResource Addict}" Margin="5 14 5 6" CornerRadius="5" Grid.Column="2" Height="25">
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
+                                   Foreground="{StaticResource Akcent}" Text="Год"></TextBlock>
+                    </Border>
+
+                    <Border Background="{StaticResource Addict}" Margin="5 14 5 6" CornerRadius="5" Grid.Column="0">
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
+                                   Foreground="{StaticResource Akcent}" Text="Неделя"></TextBlock>
+                    </Border>
+                </Grid>
+            </Grid>
+
+
+            <!-- Блок с параметрами и статистикой -->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <!-- Карточки параметров -->
+                <!--<UserControls:UserCardParameter Grid.Row="0" Loaded="UserCardParameter_Loaded"/>
+                <UserControls:UserCardParameter Grid.Column="1"/>
+                <UserControls:UserCardParameter Grid.Column="2"/>-->
+
+                <ListBox x:Name="ParametrListBox"
+                         Grid.ColumnSpan="3"
+                         Style="{StaticResource ListBoxParam}"
+                         ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <UserControls:UserCardParameter Loaded="UserCardParameter_Loaded"/>
+                    <UserControls:UserCardParameter/>
+                    <UserControls:UserCardParameter/>
+                    <UserControls:UserCardParameter/>
+                    <UserControls:UserCardParameter/>
+                    <UserControls:UserCardParameter/>
+                </ListBox>
+
+                <UserControls:UserMapControl Grid.Row="0" Grid.Column="3"></UserControls:UserMapControl>
+
+            </Grid>
+        </Grid>
+
+        <!--<GridSplitter Grid.Row="1" Grid.ColumnSpan="3"
+                      MouseDoubleClick="GridSplitter_MouseDoubleClick"
+                      Style="{StaticResource SplitterStyle}" 
+                      ResizeDirection="Rows" 
+                      DragIncrement="2"/>-->
+
+        <UCDiagramm:LineDiagrammControl x:Name="LineChartUC"
+                                        Grid.Row="2"
+                                        Grid.Column="0"
+                                        MouseEnter="LineDiagrammControl_MouseEnter"
+                                        MouseLeave="LineDiagrammControl_MouseLeave"
+                                        MouseDown="LineChartUC_MouseDown"/>
+
+        <UCDiagramm:StackedAreaControl Grid.Row="2"
+                                       Grid.Column="1"/>
+
+        <UCDiagramm:RowDiagrammControl Grid.Row="2"
+                                        Grid.Column="2"/>
+
+        <UCDiagramm:HeatDiagrammControl Grid.Row="3"
+                                        Grid.Column="0"/>
+
+        <UCDiagramm:BubbleDiagrammControl Grid.Row="3"
+                                        Grid.Column="1"/>
+
+        <UCDiagramm:PieDiagrammControl Grid.Row="3"
+                                        Grid.Column="2"/>
+
+        <!--<UCDiagramm:NegativeStackedRow/>
+
+        <UCDiagramm:GaugeDiagrammControl/>-->
+
+        <Grid Grid.Row="2" Grid.Column="3"
+              Grid.RowSpan="2">
+            <Border Style="{StaticResource BorderItemDiagramm}">
+                <StackPanel>
+                    <uicomponents:ComboBoxControl></uicomponents:ComboBoxControl>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Page>
